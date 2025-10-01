@@ -13,6 +13,9 @@ public class MoviePipelineConfiguration {
     private final PrintDirectorPipelineStep printDirectorPipelineStep;
     private final PrintTitlePipelineStep printTitlePipelineStep;
 
+    private final FindFirstElementByTitleSortedListStep firstElementByTitleSortedListStep;
+    private final SortByTitleStep sortByTitleStep;
+
     @Bean
     public Pipeline<MovieContext> printMovieInfoPipeline(){
         Pipeline<MovieContext> pipeline = new Pipeline<>();
@@ -21,6 +24,14 @@ public class MoviePipelineConfiguration {
         pipeline.addStep(printDirectorPipelineStep);
         pipeline.addStep(printGenrePipelineStep);
         return  pipeline;
+    }
+
+    @Bean
+    public Pipeline<ListOfMovieContext> findFirstElementByTitleSortMovieList(){
+        Pipeline<ListOfMovieContext> pipeline = new Pipeline<>();
+        pipeline.addStep(sortByTitleStep);
+        pipeline.addStep(firstElementByTitleSortedListStep);
+        return pipeline;
     }
 
 }

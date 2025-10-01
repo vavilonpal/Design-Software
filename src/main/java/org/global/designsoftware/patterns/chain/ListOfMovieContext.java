@@ -5,10 +5,12 @@ import lombok.Setter;
 import org.global.designsoftware.entity.Movie;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Component
-public final class MovieContext implements ContextInterface{
-    private Movie movie;
-
+public class ListOfMovieContext implements ContextInterface {
+    private List<Movie> movies;
+    private Movie firstMovie;
 }
