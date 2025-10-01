@@ -1,6 +1,6 @@
 package org.global.designsoftware.config;
 
-import org.global.designsoftware.printer.patterns.MovieFieldMask;
+import org.global.designsoftware.patterns.MovieFieldMask;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

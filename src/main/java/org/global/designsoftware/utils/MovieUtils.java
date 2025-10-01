@@ -1,10 +1,17 @@
-package org.global.designsoftware.printer;
+package org.global.designsoftware.utils;
 
+import lombok.RequiredArgsConstructor;
 import org.global.designsoftware.entity.Movie;
-import org.global.designsoftware.enums.Genre;
-import org.global.designsoftware.printer.patterns.MovieFieldMask;
+import org.global.designsoftware.patterns.MovieFieldMask;
+import org.global.designsoftware.service.MovieService;
+import org.springframework.stereotype.Component;
 
+
+@Component
+@RequiredArgsConstructor
 public class MovieUtils {
+
+    private final MovieService movieService;
 
     public static boolean equalsByMask(Movie m1, Movie m2, MovieFieldMask mask) {
         if (mask.isId() && !m1.getId().equals(m2.getId())) return false;
@@ -22,6 +29,16 @@ public class MovieUtils {
         if (mask.isFees()) target.setFees(source.getFees());
         if (mask.isGenre()) target.setGenre(source.getGenre());
     }
+    public void copyData(Movie sourceMovie, MovieFieldMask equalsMask, MovieFieldMask copyMask) {
+        for (Movie movie : movieService.findAll()) {
+            if (equalsByMask(sourceMovie, movie, equalsMask)){
+                copyFields(movie, sourceMovie, copyMask);
+                movieService.updateByMask(movie, movie.getId());
+            }
+        }
+
+    }
+
     public static Movie print(Movie movie, MovieFieldMask fieldMask){
         Movie movieMask = new Movie();
         if (fieldMask.isId()){

@@ -1,4 +1,4 @@
-package org.global.designsoftware.printer.patterns;
+package org.global.designsoftware.patterns;
 
 import lombok.Builder;
 import lombok.Getter;

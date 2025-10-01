@@ -2,7 +2,8 @@ package org.global.designsoftware.controller;
 
 import org.global.designsoftware.config.FieldMaskConfiguration;
 import org.global.designsoftware.entity.Movie;
-import org.global.designsoftware.printer.repository.MovieRepository;
+import org.global.designsoftware.repository.MovieRepository;
+import org.global.designsoftware.service.MovieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,7 +25,7 @@ class MovieControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private MovieRepository movieRepository;
+    private MovieService movieService;
 
 
     @Test
@@ -53,7 +54,7 @@ class MovieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Successful copy!!"));
 
-        Movie updated = movieRepository.findByName("Inception");
+        Movie updated = movieService.findByTitle("Inception");
         assert updated.getDirector().equals("Christopher Nolan");
         assert updated.getFees().equals(123.4f);
     }
