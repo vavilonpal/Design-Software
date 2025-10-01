@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.10'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'org.global'
+version = '0.0.1-SNAPSHOT'
+description = 'Design Software'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //Data
+    implementation 'org.postgresql:postgresql:42.7.7'
+    implementation 'org.flywaydb:flyway-core:11.13.2'
+    implementation "org.flywaydb:flyway-database-postgresql"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //tools
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,16 @@
+INSERT INTO movie (title, director, fees, genre)
+VALUES ('Inception', 'Christopher Nolan', 829.9, 'SCI_FI'),
+       ('The Godfather', 'Francis Ford Coppola', 245.1, 'CRIME'),
+       ('The Dark Knight', 'Christopher Nolan', 1005.0, 'ACTION'),
+       ('Pulp Fiction', 'Quentin Tarantino', 213.9, 'DRAMA'),
+       ('The Shining', 'Stanley Kubrick', 47.0, 'HORROR'),
+       ('The Matrix', 'Lana Wachowski', 466.3, 'SCI_FI'),
+       ('Interstellar', 'Christopher Nolan', 701.7, 'ADVENTURE'),
+       ('Django Unchained', 'Quentin Tarantino', 425.4, 'WESTERN'),
+       ('The Avengers', 'Joss Whedon', 1518.8, 'ACTION'),
+       ('The Silence of the Lambs', 'Jonathan Demme', 272.7, 'THRILLER'),
+       ('Blade Runner 2049', 'Denis Villeneuve', 260.5, 'SCI_FI'),
+       ('The Lord of the Rings', 'Peter Jackson', 1146.0, 'FANTASY'),
+       ('Sherlock Holmes', 'Guy Ritchie', 524.0, 'DETECTIVE'),
+       ('Mad Max: Fury Road', 'George Miller', 380.4, 'ACTION'),
+       ('Avatar', 'James Cameron', 2923.7, 'SCI_FI');
