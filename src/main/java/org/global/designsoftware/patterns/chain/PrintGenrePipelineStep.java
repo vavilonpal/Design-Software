@@ -1,9 +1,12 @@
 package org.global.designsoftware.patterns.chain;
 
-public class PrintGenrePipelineStep implements PipelineStep{
-    @Override
-    public void execute(Context context) {
+import org.springframework.stereotype.Component;
 
+@Component
+public class PrintGenrePipelineStep implements PipelineStep<MovieContext>  {
+    @Override
+    public void execute(MovieContext movieContext) {
+        System.out.println("Genre: " + movieContext.getMovie().getGenre().toString());
     }
 
     @Override

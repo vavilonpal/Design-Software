@@ -1,7 +1,7 @@
 package org.global.designsoftware.patterns.chain;
 
-public interface PipelineStep {
+public interface PipelineStep<TContext extends ContextInterface>  {
 
-    void execute(Context context);
+    void execute(TContext context);
     void Introspect();
 }
