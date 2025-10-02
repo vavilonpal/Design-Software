@@ -2,15 +2,15 @@ package org.global.designsoftware.patterns.chain;
 
 
 import lombok.RequiredArgsConstructor;
-import org.global.designsoftware.patterns.chain.context.ListOfMovieContext;
+import org.global.designsoftware.patterns.chain.context.ContextInterface;
 
 @RequiredArgsConstructor
-public class LogStepExecutingTime implements PipelineStep<ListOfMovieContext>{
+public class LogExecutingTimeStep<TContext extends ContextInterface> implements PipelineStep<TContext>{
 
-    private final PipelineStep<ListOfMovieContext> pipelineStep;
+    private final PipelineStep<TContext> pipelineStep;
 
     @Override
-    public void execute(ListOfMovieContext listOfMovieContext) {
+    public void execute(TContext context) {
         pipelineStep.introspect();
 
         long start = System.currentTimeMillis();
@@ -19,9 +19,9 @@ public class LogStepExecutingTime implements PipelineStep<ListOfMovieContext>{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        pipelineStep.execute(listOfMovieContext);
+        pipelineStep.execute(context);
         long end = System.currentTimeMillis();
-        System.out.println("Время выполнения: " + (end - start) + " ms");
+        System.out.println("Время выполнения "+pipelineStep.getClass().getSimpleName()+ ": " + (end - start) + " ms");
 
     }
 

@@ -11,6 +11,8 @@ import org.global.designsoftware.patterns.chain.printSteps.PrintTitlePipelineSte
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.function.Function;
+
 @Configuration
 @RequiredArgsConstructor
 public class MoviePipelineConfiguration {
@@ -19,12 +21,10 @@ public class MoviePipelineConfiguration {
     private final PrintTitlePipelineStep printTitlePipelineStep;
 
     private final SortByTitleStep sortByTitleStep;
+    private final FindFirstElementByTitleSortedListStep firstElementByTitleSortedListStep;
+    private final Function<PipelineStep<MovieContext>, PipelineStep<MovieContext>>  wrapStepToLogStepFunction = LogExecutingTimeStep::new;
 
-    @Bean
-    public LogStepExecutingTime  firstElementByTitleSortedListStep(){
-        var firstElementByTitleSortedListStep = new FindFirstElementByTitleSortedListStep();
-        return new LogStepExecutingTime(firstElementByTitleSortedListStep);
-    }
+
     @Bean
     public Pipeline<MovieContext> printMovieInfoPipeline(){
         Pipeline<MovieContext> pipeline = new Pipeline<>();
@@ -32,6 +32,8 @@ public class MoviePipelineConfiguration {
         pipeline.addStep(printTitlePipelineStep);
         pipeline.addStep(printDirectorPipelineStep);
         pipeline.addStep(printGenrePipelineStep);
+        pipeline.replaceFirstInstance(PrintTitlePipelineStep.class, printGenrePipelineStep);
+        pipeline.wrapAll(PrintTitlePipelineStep.class,  wrapStepToLogStepFunction);
         return  pipeline;
     }
 
@@ -39,8 +41,9 @@ public class MoviePipelineConfiguration {
     public Pipeline<ListOfMovieContext> findFirstElementByTitleSortMovieList(){
         Pipeline<ListOfMovieContext> pipeline = new Pipeline<>();
         pipeline.addStep(sortByTitleStep);
-        pipeline.addStep(firstElementByTitleSortedListStep());
+        pipeline.addStep(firstElementByTitleSortedListStep);
         return pipeline;
     }
+
 
 }
