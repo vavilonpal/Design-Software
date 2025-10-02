@@ -9,10 +9,11 @@ public class PrintGenrePipelineStep implements PipelineStep<MovieContext> {
     @Override
     public void execute(MovieContext movieContext) {
         System.out.println("Genre: " + movieContext.getMovie().getGenre().toString());
+        introspect();
     }
 
     @Override
     public void introspect() {
-
+        System.out.println(this.getClass().getSimpleName()+ ": step is completed");
     }
 }
