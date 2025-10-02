@@ -1,4 +1,4 @@
-package org.global.designsoftware.patterns.chain;
+package org.global.designsoftware.patterns.chain.context;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-public final class MovieContext implements ContextInterface{
+public final class MovieContext implements ContextInterface {
     private Movie movie;
 
 }

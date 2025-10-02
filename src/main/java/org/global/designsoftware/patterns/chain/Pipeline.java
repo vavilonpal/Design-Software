@@ -1,6 +1,7 @@
 package org.global.designsoftware.patterns.chain;
 
-import java.util.ArrayList;
+import org.global.designsoftware.patterns.chain.context.ContextInterface;
+
 import java.util.LinkedList;
 import java.util.List;
 

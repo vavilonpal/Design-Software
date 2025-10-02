@@ -1,6 +1,7 @@
 package org.global.designsoftware.patterns.chain;
 
 import org.global.designsoftware.entity.Movie;
+import org.global.designsoftware.patterns.chain.context.ListOfMovieContext;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -16,7 +17,7 @@ public class SortByTitleStep implements PipelineStep<ListOfMovieContext>{
     }
 
     @Override
-    public void Introspect() {
+    public void introspect() {
 
     }
 }

@@ -1,5 +1,6 @@
 package org.global.designsoftware.patterns.chain;
 
+import org.global.designsoftware.patterns.chain.context.ListOfMovieContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,7 +11,7 @@ public class FindFirstElementByTitleSortedListStep implements PipelineStep<ListO
     }
 
     @Override
-    public void Introspect() {
+    public void introspect() {
 
     }
 }
