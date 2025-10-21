@@ -1,4 +1,4 @@
-package org.global.designsoftware.patterns.chain;
+package org.global.designsoftware.patterns.chain.pipeline;
 
 import org.global.designsoftware.patterns.chain.context.ContextInterface;
 
@@ -38,6 +38,7 @@ public class Pipeline<TContext extends ContextInterface> {
             }
         }
     }
+
     public void replaceAll(Class<? extends PipelineStep<TContext>> typeToReplace, PipelineStep<TContext> newStep) {
         for (int i = 0; i < steps.size(); i++) {
             if (steps.get(i).getClass().equals(typeToReplace)) {
@@ -46,5 +47,4 @@ public class Pipeline<TContext extends ContextInterface> {
         }
     }
 
-    // Works
 }

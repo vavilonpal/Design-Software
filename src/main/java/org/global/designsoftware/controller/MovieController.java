@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.global.designsoftware.entity.Movie;
 import org.global.designsoftware.patterns.chain.context.ListOfMovieContext;
 import org.global.designsoftware.patterns.chain.context.MovieContext;
-import org.global.designsoftware.patterns.chain.Pipeline;
+import org.global.designsoftware.patterns.chain.pipeline.Pipeline;
 import org.global.designsoftware.utils.MovieUtils;
 import org.global.designsoftware.patterns.MovieFieldMask;
 import org.global.designsoftware.service.MovieService;

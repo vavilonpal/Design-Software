@@ -1,4 +1,4 @@
-package org.global.designsoftware.patterns.chain;
+package org.global.designsoftware.patterns.chain.pipeline;
 
 import org.global.designsoftware.patterns.chain.context.ContextInterface;
 

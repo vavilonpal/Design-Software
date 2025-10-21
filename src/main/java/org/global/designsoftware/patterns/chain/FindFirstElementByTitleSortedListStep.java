@@ -1,6 +1,7 @@
 package org.global.designsoftware.patterns.chain;
 
 import org.global.designsoftware.patterns.chain.context.ListOfMovieContext;
+import org.global.designsoftware.patterns.chain.pipeline.PipelineStep;
 import org.springframework.stereotype.Component;
 
 @Component

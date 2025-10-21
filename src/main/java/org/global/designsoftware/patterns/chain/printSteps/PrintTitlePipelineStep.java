@@ -1,6 +1,6 @@
 package org.global.designsoftware.patterns.chain.printSteps;
 
-import org.global.designsoftware.patterns.chain.PipelineStep;
+import org.global.designsoftware.patterns.chain.pipeline.PipelineStep;
 import org.global.designsoftware.patterns.chain.context.MovieContext;
 import org.springframework.stereotype.Component;
 
