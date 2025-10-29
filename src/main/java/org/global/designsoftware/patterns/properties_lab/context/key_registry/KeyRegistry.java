@@ -1,4 +1,4 @@
-package org.global.designsoftware.patterns.properties_lab.context.proect_A.key_registry;
+package org.global.designsoftware.patterns.properties_lab.context.key_registry;
 
 
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ public final class KeyRegistry {
         TypedKey<?> existing = registry.get(name);
 
         if (existing != null) {
-            if (!existing.getType().equals(type)) {
+            if (existing.getType().equals(type)) {
                 throw new IllegalArgumentException(
                         "Key conflict: key '" + name + "' already registered for type "
                                 + existing.getType().getName()

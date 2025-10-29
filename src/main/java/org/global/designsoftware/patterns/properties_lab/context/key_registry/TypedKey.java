@@ -1,4 +1,4 @@
-package org.global.designsoftware.patterns.properties_lab.context.proect_A.key_registry;
+package org.global.designsoftware.patterns.properties_lab.context.key_registry;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

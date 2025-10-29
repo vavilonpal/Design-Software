@@ -1,4 +1,22 @@
-1. Объясните, почему подход FatStruct не пойдет, если проект, 
+***
+1. Я выбрал пример с Filter. Был создан кастомный фильтр для логрирования запросов. Который вычисляет и выводит в консоль время выполнения запроса.
+В слеудющем примере мы динамично прделеяем свойства данного флитра и передаем его стороннему контексту.
+```java
+@Bean
+    public FilterRegistrationBean<LoggingFilter> loggingFilter(){
+        FilterRegistrationBean<LoggingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+
+        filterRegistrationBean.setFilter(new LoggingFilter());
+        filterRegistrationBean.addUrlPatterns("/api/v1/movie");
+
+        filterRegistrationBean.setOrder(1);
+
+        return filterRegistrationBean;
+
+    }
+```
+***
+2. Объясните, почему подход FatStruct не пойдет, если проект, 
 определяющий его, является библиотекой, не знающей о своих пользователях.   
     - Проблемы, если FatStruct используется в библиотеке, не знающей своих пользователей:
 
@@ -11,4 +29,25 @@
 Сломанная изоляция. Если библиотека решит добавить поле с тем же именем, но другим смыслом — возможен конфликт.
 
 Вывод: для библиотек, которые должны взаимодействовать с неизвестными заранее типами данных, необходим динамический, расширяемый контекст — либо массив Object[], либо словарь Map, плюс механизм безопасности ключей.
+***
+3. В пакете была создана сущность `User`, с которой предоставялется возмонжость работать через класс `DynamicExecutor`, 
+который в свою очередь принимает словарь и на основе данного слвоаря выполняет дальнейшие действия не имея при этом доступ,
+к самому классу `User`.
+```java
+Map<String, Object> user = new HashMap<>();
+        user.put("name", "Alice");
+        user.put("age", 22);
+        user.put("role", "Admin");
 
+
+        boolean adult = DynamicExecutor.isAdult(user);
+        System.out.println("Is adult: " + adult);
+
+        Object result = DynamicExecutor.execute(user, u -> u.get("name") + " has role " + u.get("role"));
+
+        System.out.println(result);
+```
+***
+4. Был создан реест ключей `KeyRegistry.class`, который предоставляет возможнсоть регистировать ключ.
+Так же имеется проверка на предмет уже созданного такого ключа. Сам ключ реализован классом `TypedKey<T>`, который позволяет типизировать значение данного ключа.
+Далее был создан класс контекст, который предоставляет доступ к данным ключам `TypedContext.class`

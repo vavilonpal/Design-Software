@@ -1,12 +1,12 @@
-package org.global.designsoftware.patterns.properties_lab.context.proect_A.key_registry.context;
+package org.global.designsoftware.patterns.properties_lab.context.key_registry.context;
 
-import org.global.designsoftware.patterns.properties_lab.context.proect_A.key_registry.TypedKey;
+import org.global.designsoftware.patterns.properties_lab.context.key_registry.TypedKey;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public final class TypedContext {
-    private final Map<TypedKey<?>, Object> data = new HashMap<>();
+    private final Map<TypedKey<?>, Object> data = new  HashMap<>();
 
     public <T> void put(TypedKey<T> key, T value) {
         if (value != null && !key.getType().isInstance(value)) {
