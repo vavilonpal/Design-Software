@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,35 +15,34 @@ import java.util.function.Consumer;
 @Getter
 @Setter
 @ToString
+@Slf4j
 public final class Question {
     private final String text;
     private final List<Answer> answers;
+    private final String creationLocation;
+
 
     public static QuestionBuilder builder() {
-        return new QuestionBuilder();
+        //получем место создания билдера
+        StackTraceElement location = Thread.currentThread().getStackTrace()[2];
+        return new QuestionBuilder(location);
     }
-
 
     public static class QuestionBuilder {
         private String text;
         private List<Answer> answers = new ArrayList<>();
+        private final StackTraceElement creationPoint;
 
-        QuestionBuilder() {
+        QuestionBuilder(StackTraceElement creationPoint) {
+            this.creationPoint = creationPoint;
         }
 
         public QuestionBuilder text(String text) {
-            if (text == null || text.isBlank()) {
-                throw new IllegalArgumentException("Question text cannot be empty");
-            }
-
             this.text = text;
             return this;
         }
 
         public QuestionBuilder answers(List<Answer> answers) {
-            if (answers.isEmpty()) {
-                throw new IllegalStateException("Test must contain at least one answer");
-            }
             this.answers = answers;
             return this;
         }
@@ -59,17 +59,36 @@ public final class Question {
             return this;
         }
 
+
         public Question build() {
-            if (text == null || this.text.isBlank()) {
-                throw new IllegalArgumentException("Question text cannot be empty");
+            List<String> errors = new ArrayList<>();
+
+            if (text == null || text.isBlank()) {
+                errors.add("Question text cannot be empty");
             }
-            return new Question(this.text, this.answers);
-        }
 
-        public String toString() {
-            return "Question.QuestionBuilder(text=" + this.text + ", answers=" + this.answers + ")";
-        }
+            if (answers.isEmpty()) {
+                errors.add("Question must contain at least one answer");
+            }
 
+            for (int i = 0; i < answers.size(); i++) {
+                Answer answer = answers.get(i);
+                List<String> answerErrors = answer.validate();
+
+                for (String answerError : answerErrors) {
+                    errors.add("Answer[" + i + "]: " + answerError);
+                }
+            }
+
+            if (!errors.isEmpty()) {
+                String errorMessage = "Errors in Question built at " + creationPoint.getFileName() +
+                        ":" + creationPoint.getLineNumber() + "\n - " + String.join("\n - ", errors);
+                log.info(errorMessage);
+                throw new IllegalStateException(errorMessage);
+            }
+
+            return new Question(text, answers, creationPoint.getFileName() + ":" + creationPoint.getLineNumber());
+        }
     }
 
     public static class AnswersScope {

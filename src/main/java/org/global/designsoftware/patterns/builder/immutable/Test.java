@@ -19,7 +19,6 @@ public final class Test {
     private final String author;
     private final String difficulty;
     private final List<Question> questions;
-    private final String creationTrace;
 
     public static TestBuilder builder() {
         return new TestBuilder();
@@ -30,12 +29,7 @@ public final class Test {
         private String author;
         private String difficulty;
         private final List<Question> questions = new ArrayList<>();
-        private final String trace = captureTrace();
 
-        private static String captureTrace() {
-            StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-            return stack.length > 3 ? stack[3].toString() : "Unknown source";
-        }
 
         public TestBuilder title(String title) {
             this.title = title;
@@ -56,15 +50,15 @@ public final class Test {
 
         public Test build() {
             if (title == null || title.isBlank()) {
-                throw  new RuntimeException("Test title cannot be empty (" + trace + ")");
+                throw  new RuntimeException("Test title cannot be empty");
             }
             if (questions.isEmpty()) {
-                throw  new RuntimeException("Test must contain at least one question (" + trace + ")");
+                throw  new RuntimeException("Test must contain at least one question ");
             }
-            return new Test(title, author, difficulty, questions, trace);
+            return new Test(title, author, difficulty, questions);
         }
 
-        // 🔹 Scope
+        // Scope
         public static class TestScope {
             private final TestBuilder parent;
 

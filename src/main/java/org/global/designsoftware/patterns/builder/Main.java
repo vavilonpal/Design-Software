@@ -5,6 +5,14 @@ import org.global.designsoftware.patterns.builder.immutable.Answer;
 import org.global.designsoftware.patterns.builder.immutable.Question;
 import org.global.designsoftware.patterns.builder.immutable.Test;
 
+
+/*
+ * 1) Реализуйте более высокоуровневые функции конфигурации, которым необходим доступ к модели.
+ * 2) Реализуйте fluent builder, используйте делегаты конфигурации, реализуйте паттерн
+ * scope для группирования общих данных последующих объектов.
+ * 3) Улучшите систему валидации, добавив указание строчки кода где был создан объект.
+ *  Выводите ошибки для всех объектов с проблемами, а не только для первого.
+ * */
 public class Main {
     public static void main(String[] args) {
         Answer answer = Answer.builder()

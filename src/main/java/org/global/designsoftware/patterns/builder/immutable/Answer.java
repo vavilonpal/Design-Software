@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,6 +21,13 @@ public final class Answer {
     }
 
 
+    public List<String> validate() {
+        List<String> errors = new ArrayList<>();
+        if (text == null || text.isBlank()) {
+            errors.add("Answer text cannot be empty ");
+        }
+        return errors;
+    }
     public static class AnswerBuilder {
         private String text;
         private boolean correct;
@@ -45,10 +55,11 @@ public final class Answer {
             return this;
         }
 
+
         // Auto check correctness
         public AnswerBuilder autoCorrect(String text, String expected) {
             this.text(text);
-            this.correct(text != null && expected != null && text.equalsIgnoreCase(expected));
+            this.correct(text != null && text.equalsIgnoreCase(expected));
             return this;
         }
         // Copy other builder config
