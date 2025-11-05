@@ -1,7 +1,6 @@
 package org.global.designsoftware.patterns.properties_lab.context.procet_B;
 
 
-
 import org.global.designsoftware.patterns.properties_lab.context.key_registry.KeyRegistry;
 import org.global.designsoftware.patterns.properties_lab.context.key_registry.TypedKey;
 import org.global.designsoftware.patterns.properties_lab.context.key_registry.context.TypedContext;
