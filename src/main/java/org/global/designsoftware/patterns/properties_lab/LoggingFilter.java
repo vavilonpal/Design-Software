@@ -23,14 +23,12 @@ public class LoggingFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
 
-        httpRequest.setAttribute("StartTime", System.currentTimeMillis());
-
+        String clientAddress  = ((HttpServletRequest) servletRequest).getRemoteAddr();
+        if (clientAddress.equals("0:0:0:0:0:0:0:1")){
+            httpRequest.setAttribute("role", "admin");
+            System.out.println("Role admin is set!!!!");
+        }
         filterChain.doFilter(servletRequest, servletResponse);
-
-
-        long startTime = (long) httpRequest.getAttribute("startTime");
-        long duration = System.currentTimeMillis() - startTime;
-        System.out.println("Request took " + duration + "ms");
 
     }
 }

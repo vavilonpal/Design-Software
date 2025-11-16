@@ -1,7 +1,9 @@
 package org.global.designsoftware.controller;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.core.ApplicationContext;
 import org.global.designsoftware.entity.Movie;
 import org.global.designsoftware.patterns.chain.context.ListOfMovieContext;
 import org.global.designsoftware.patterns.chain.context.MovieContext;
@@ -11,6 +13,7 @@ import org.global.designsoftware.patterns.MovieFieldMask;
 import org.global.designsoftware.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import java.util.List;
 
@@ -35,7 +38,13 @@ public class MovieController {
     private final Pipeline<ListOfMovieContext> findFirstElementByTitleSortMovieList;
 
     @GetMapping("/{title}")
-    public ResponseEntity<Movie> getMovieByTitle(@PathVariable String title) {
+    public ResponseEntity<Movie> getMovieByTitle(@PathVariable String title, HttpServletRequest request) {
+
+
+       /* if (!role.equals("admin")){
+            return
+        }*/
+
         Movie movie = movieService.findByTitle(title);
         Movie movieMask = MovieUtils.print(movie, directorAndGenre);
         return ResponseEntity.ok(movieMask);

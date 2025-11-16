@@ -37,13 +37,22 @@ public final class Question {
             this.creationPoint = creationPoint;
         }
 
-        public QuestionBuilder text(String text) {
-            this.text = text;
+        public QuestionBuilder answers(List<Answer> answers) {
+            this.answers = answers;
             return this;
         }
 
-        public QuestionBuilder answers(List<Answer> answers) {
-            this.answers = answers;
+        public QuestionBuilder basicAddition(int x, int y){
+            String text = String.format("%d + %d = ?",x,y);
+            this.text(text);
+            this.configureAnswers(a ->a
+                    .answer(Integer.toString(x+y-1), false)
+                    .answer(Integer.toString(x+y), true));
+            return this;
+        }
+
+        public QuestionBuilder text(String text) {
+            this.text = text;
             return this;
         }
 

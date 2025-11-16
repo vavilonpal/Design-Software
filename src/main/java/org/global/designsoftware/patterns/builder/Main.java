@@ -1,8 +1,6 @@
 package org.global.designsoftware.patterns.builder;
 
-
 import org.global.designsoftware.patterns.builder.immutable.Answer;
-import org.global.designsoftware.patterns.builder.immutable.Question;
 import org.global.designsoftware.patterns.builder.immutable.Test;
 
 
@@ -27,12 +25,8 @@ public class Main {
                     s.setAuthor("John Doe");
                     s.setDifficulty("Easy");
                 })
-                .addQuestion(q -> q
-                        .text("2 + 2 = ?")
-                        .configureAnswers(a -> a
-                                .answer("3", false)
-                                .answer("4", true)
-                        )
+                .addQuestion(q -> q.basicAddition(2, 2))
+                .addQuestion(q -> q.basicAddition(2,3)
                 )
                 .addQuestion(q -> q
                         .text("5 + 5 = ?")
